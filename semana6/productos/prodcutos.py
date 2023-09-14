@@ -6,7 +6,9 @@ class Producto:
         self.categoria = categoria
 
     def mostrar_detalle(self):
-        print(f"nombre: {self.nombre}\nprecio: {self.precio}\ncategoría: {self.categoria}")
+        print(
+            f"nombre: {self.nombre}\nprecio: {self.precio}\ncategoría: {self.categoria}")
+
 
 class Electronico(Producto):
     def __init__(self, nombre, precio, categoria, marca, modelo):
@@ -26,7 +28,7 @@ class Alimenticio(Producto):
 
     def mostrar_detalle(self):
         detalle_base = super().mostrar_detalle()
-        print(f"{detalle_base}\nfecha de vencimiento: {self.fecha_vencimiento}") 
+        print(f"{detalle_base}\nfecha de vencimiento: {self.fecha_vencimiento}")
 
 
 class Vestimenta(Producto):

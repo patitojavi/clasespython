@@ -16,13 +16,14 @@ class Perro(Animal):
 
 class Gato(Animal):
     def sonido(self):
-        return"miau"
+        return "miau"
 
 
 class Pajaro(Animal):
     def sonido(self):
-        return"pio"
+        return "pio"
 
-perro = Perro("MAx",3)
+
+perro = Perro("MAx", 3)
 
 print(f"{perro.nombre} hace el sonido {perro.sonido()}")
