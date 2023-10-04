@@ -60,3 +60,35 @@ public:
         return "pio";
     }
 };
+
+
+
+int main() {
+    while (true) {
+        std::cout << "¿Qué animal quieres escuchar? (perro, gato, pajaro) o 'salir' para salir." << std::endl;
+        std::string opcion;
+        std::cin >> opcion;
+
+        if (opcion == "salir") {
+            break;
+        }
+
+        Animal* animal = nullptr;
+        if (opcion == "perro") {
+            animal = new Perro("Eduardo", 3);
+        } else if (opcion == "gato") {
+            animal = new Gato("Javi", 2);
+        } else if (opcion == "pajaro") {
+            animal = new Pajaro("Pato", 1);
+        } else {
+            std::cout << "Animal no reconocido" << std::endl;
+            continue;
+        }
+
+        std::cout << animal->nombre << " hace el sonido: " << animal->sonido() << std::endl;
+
+        delete animal;
+    }
+
+    return 0;
+}

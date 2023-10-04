@@ -34,3 +34,36 @@ class ReservaPrimeraClase(Reserva):
 
     def mostrar_detalle(self):
         return f"Reserva Primera Clase - Pasajero: {self.pasajero}, Vuelo: {self.vuelo}, Fecha: {self.fecha}, Asiento Vip: {self.asientovip}"
+
+
+reservas = []
+
+while True:
+
+    pasajero = input("Nombre del pasajero: ")
+    vuelo = input("Número de vuelo: ")
+    fecha = input("Fecha de vuelo: ")
+
+
+    tipo_reserva = input("Tipo de reserva (Economica/Business/PrimeraClase): ").lower()
+
+    if tipo_reserva == "economica":
+        asiento = input("Número de asiento: ")
+        reserva = ReservaEconomica(pasajero, vuelo, fecha, asiento)
+    elif tipo_reserva == "negocio":
+        asiento_negocio = input("Número de asiento de negocios: ")
+        reserva = ReservaBusiness(pasajero, vuelo, fecha, asiento_negocio)
+    elif tipo_reserva == "primerclase":
+        asientovip = input("Número de asiento VIP: ")
+        reserva = ReservaPrimeraClase(pasajero, vuelo, fecha, asientovip)
+    else:
+        print("Tipo de reserva no válido. Inténtalo de nuevo.")
+        continue
+    reservas.append(reserva)
+
+    otra_reserva = input("¿Deseas hacer otra reserva? (si/no): ")
+    if otra_reserva.lower() != "si":
+        break
+
+for reserva in reservas:
+    print(reserva.mostrar_detalle())
