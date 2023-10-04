@@ -1,93 +1,96 @@
 #include <iostream>
-#include <string>
-
-
+#include <vector>
 
 class Animal {
 public:
-    Animal(const std::string& nombre, int edad)
-        : nombre(nombre), edad(edad) {}
+    Animal(std::string nombre, int edad) : nombre(nombre), edad(edad) {}
+    virtual std::string sonido() = 0;
 
-    virtual std::string sonido() const {
-        return "";
-    }
-
-    std::string getNombre() const {
-        return nombre;
-    }
-
-    int getEdad() const {
-        return edad;
-    }
-
-private:
+protected:
     std::string nombre;
     int edad;
 };
 
-
-
 class Perro : public Animal {
 public:
-    Perro(const std::string& nombre, int edad)
-        : Animal(nombre, edad) {}
-
-    std::string sonido() const override {
+    Perro(std::string nombre, int edad) : Animal(nombre, edad) {}
+    std::string sonido() override {
         return "guau";
     }
 };
 
-
-
 class Gato : public Animal {
 public:
-    Gato(const std::string& nombre, int edad)
-        : Animal(nombre, edad) {}
-
-    std::string sonido() const override {
+    Gato(std::string nombre, int edad) : Animal(nombre, edad) {}
+    std::string sonido() override {
         return "miau";
     }
 };
 
-
-
 class Pajaro : public Animal {
 public:
-    Pajaro(const std::string& nombre, int edad)
-        : Animal(nombre, edad) {}
-
-    std::string sonido() const override {
+    Pajaro(std::string nombre, int edad) : Animal(nombre, edad) {}
+    std::string sonido() override {
         return "pio";
     }
 };
 
-
-
 int main() {
+    std::vector<Animal*> animales;
+
     while (true) {
-        std::cout << "¿Qué animal quieres escuchar? (perro, gato, pajaro) o 'salir' para salir." << std::endl;
+        std::cout << "Seleccione una opción:" << std::endl;
+        std::cout << "1. Agregar Perro" << std::endl;
+        std::cout << "2. Agregar Gato" << std::endl;
+        std::cout << "3. Agregar Pájaro" << std::endl;
+        std::cout << "4. Mostrar Animales" << std::endl;
+        std::cout << "5. Salir" << std::endl;
+
         std::string opcion;
         std::cin >> opcion;
 
-        if (opcion == "salir") {
+        if (opcion == "1") {
+            std::string nombre;
+            int edad;
+            std::cout << "Ingrese el nombre del perro: ";
+            std::cin >> nombre;
+            std::cout << "Ingrese la edad del perro: ";
+            std::cin >> edad;
+            Perro* perro = new Perro(nombre, edad);
+            animales.push_back(perro);
+        } else if (opcion == "2") {
+            std::string nombre;
+            int edad;
+            std::cout << "Ingrese el nombre del gato: ";
+            std::cin >> nombre;
+            std::cout << "Ingrese la edad del gato: ";
+            std::cin >> edad;
+            Gato* gato = new Gato(nombre, edad);
+            animales.push_back(gato);
+        } else if (opcion == "3") {
+            std::string nombre;
+            int edad;
+            std::cout << "Ingrese el nombre del pájaro: ";
+            std::cin >> nombre;
+            std::cout << "Ingrese la edad del pájaro: ";
+            std::cin >> edad;
+            Pajaro* pajaro = new Pajaro(nombre, edad);
+            animales.push_back(pajaro);
+        } else if (opcion == "4") {
+            std::cout << "\nListado de Animales:" << std::endl;
+            for (Animal* animal : animales) {
+                std::cout << "Nombre: " << animal->nombre << ", Edad: " << animal->edad << ", Sonido: " << animal->sonido() << std::endl;
+                std::cout << "--------------------" << std::endl;
+            }
+        } else if (opcion == "5") {
+            // Liberar la memoria de los objetos
+            for (Animal* animal : animales) {
+                delete animal;
+            }
             break;
-        }
-
-        Animal* animal = nullptr;
-        if (opcion == "perro") {
-            animal = new Perro("Eduardo", 3);
-        } else if (opcion == "gato") {
-            animal = new Gato("Javi", 2);
-        } else if (opcion == "pajaro") {
-            animal = new Pajaro("Pato", 1);
         } else {
-            std::cout << "Animal no reconocido" << std::endl;
-            continue;
+            std::cout << "Opción no válida. Por favor, elija una opción válida." << std::endl;
         }
-
-        std::cout << animal->nombre << " hace el sonido: " << animal->sonido() << std::endl;
-
-        delete animal;
     }
 
     return 0;
